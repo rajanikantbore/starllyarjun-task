@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Link } from '@material-ui/core'
 
 function Home() {
   const [data, setData] = useState([])
 
-  useEffect(()=>{
+useEffect(()=>{
     axios.get('https://jsonplaceholder.typicode.com/posts')
     .then(res=> {
-      // console.log(res.data)
+      console.log(res.data)
       setData(res.data)
     }).catch(err => console.log(err))
     }, [])
 
-    const arr = data.map((data, index)=>{
+    const columns = data.map((data, index)=>{
       return (
         <tr>
-          <td>{data.title}</td>
-        </tr>
+          <Link href={`https://jsonplaceholder.typicode.com/posts/${data.id}`} target ="_blank"> {data.title} </Link>
+         </tr>
       )
     })
 
@@ -25,9 +26,9 @@ function Home() {
       <h1>Home</h1>
       <table>
         <tr>
-          <th>title</th>
+          <th>Title</th>
         </tr>
-        {arr}
+        {columns}
       </table>
     </div>
   )
