@@ -4,6 +4,7 @@ import NamesState from './context/names/NamesState';
 import Home from './components/Home';
 import About from './components/About';
 import DatePick from './components/DatePick';
+import Tables from './components/Tables';
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
             <li>
               <Link to="/date"> Date Picker</Link>
             </li>
+            <li>
+              <Link to="/tables"> Tables</Link>
+            </li>
 
           </ul>
           <hr />
@@ -28,6 +32,7 @@ function App() {
             <Route exact path="/" element = {<Home />} />
             <Route path="/about" element = {<About />} />
             <Route path="/date" element = {<DatePick />} />
+            <Route path="/tables" element = {<Tables />} />
           </Routes>
         </div>
       </BrowserRouter>
