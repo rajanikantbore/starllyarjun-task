@@ -1,37 +1,51 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import { Link } from '@material-ui/core'
+import React from 'react';
+import axios from 'axios';
+                 
 
-function Home() {
-  const [data, setData] = useState([])
+export default class Home extends React.Component {
+  state = {
+    updateMe: [],
+    persons: []
+  }
 
-useEffect(()=>{
-    axios.get('https://jsonplaceholder.typicode.com/posts')
-    .then(res=> {
-      console.log(res.data)
-      setData(res.data)
-    }).catch(err => console.log(err))
-    }, [])
+  componentDidMount() {
+    axios.get(`https://jsonplaceholder.typicode.com/posts`)
+      .then(res => {
+        const persons = res.data;
+        this.setState({ persons });
+      })
+  }
 
-    const columns = data.map((data, index)=>{
-      return (
-        <tr>
-          <Link href={`https://jsonplaceholder.typicode.com/posts/${data.id}`} target ="_blank"> {data.title} </Link>
-         </tr>
-      )
-    })
-
-  return (
-    <div> 
-      <h1>Home</h1>
-      <table>
-        <tr>
-          <th>Title</th>
-        </tr>
-        {columns}
-      </table>
-    </div>
-  )
+  clickMe(person){
+    console.log(person);
+    this.setState({updateMe:(person.userId,  
+                              person.id,
+                              person.title,
+                              person.body)
+  });
+ 
+  // this.setState({updateMe:person[{}]})
 }
 
-export default Home
+  render() {
+    return (
+      <div>
+        <h1>Home</h1>
+        <h2>Titles</h2>
+        <h2>{this.state.updateMe}</h2>
+
+        {
+          this.state.persons.map((person,index) =>(
+// eslint-disable-next-line
+              <p key={person.id}>
+                <a onClick={this.clickMe.bind(this,person)}>
+                  {person.title}
+                </a>
+              </p>
+          )
+        )
+        }
+    </div>
+    )
+  }
+}
