@@ -5,6 +5,8 @@ import Home from './components/Home';
 import About from './components/About';
 import DatePick from './components/DatePick';
 import Tables from './components/Tables';
+import ApiDataTable from './components/ApiDataTable';
+import PdfView from './components/PdfView';
 
 function App() {
   return (
@@ -24,7 +26,12 @@ function App() {
             <li>
               <Link to="/tables"> Tables</Link>
             </li>
-
+            <li>
+              <Link to="/apitables"> ApiTables</Link>
+            </li>
+            <li>
+              <Link to="/pdf"> PdfView</Link>
+            </li>
           </ul>
           <hr />
 
@@ -33,6 +40,8 @@ function App() {
             <Route path="/about" element = {<About />} />
             <Route path="/date" element = {<DatePick />} />
             <Route path="/tables" element = {<Tables />} />
+            <Route path="/apitables" element = {<ApiDataTable />} />
+            <Route path="/pdf" element = {<PdfView />} />          
           </Routes>
         </div>
       </BrowserRouter>
